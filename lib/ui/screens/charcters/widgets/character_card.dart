@@ -54,14 +54,21 @@ class _CharacterCardState extends State<CharacterCard>
   }
 
   void _onScrollChanged() {
+
+
+    //* Current scroll position
     final p = scrollPosition;
 
+
+    //* how much current card is far from 0.0 offset 
     final f = (yourCharactersBoxHeight + cardHeight * widget.index);
 
     if (p > f) {
-      final x = 1 - (p - f) / cardHeight * 0.5;
 
-      final double? value = lerpDouble(0.0, 1.0, x.clamp(0.0, 1.0).toDouble());
+      //* some math calculation to determinate difference factor
+      final factor = 1 - (p - f) / cardHeight * 0.5;
+
+      final double? value = lerpDouble(0.0, 1.0, factor.clamp(0.0, 1.0).toDouble());
 
       _updateAnimationValue(value);
     }
